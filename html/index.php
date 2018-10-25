@@ -14,11 +14,11 @@
 
 <div class="head">Trip Budget Planner</div>
 
-<div class="center">Please choose destination</div>
+<div class="center">Where are you going?</div>
 
-<button class="button button1">Chicago<button>
-<button class="button button2">Los Angelos<button>
-<button class="button button3">New York<button>
+<button class="button button1">Phoenix<button>
+<button class="button button2">Las Vegas<button>
+<button class="button button3">Toronto<button>
 
 
 
