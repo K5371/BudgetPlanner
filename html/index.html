@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="template.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<video autoplay muted loop id="myVideo">
+  <source src="index_background.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="head">Trip Budget Planner</div>
+
+<div class="center" id="Q1">Where are you going?</div>
+
+<div class="center" id="Q2">How long are you staying?</div>
+
+<div class="center" id="Q3">How much are you expecting to cost</div>
+
+
+<button class="button button1" style="border:none" onclick="Phoenix()" id="Phoenix">Phoenix<button>
+<button class="button button2" style="border:none" onclick="LV()" id="LV">Las Vegas<button>
+<button class="button button3" style="border:none" onclick="Toronto()" id="Toronto">Toronto<button>
+
+<button class="button button1" style="border:none" onclick="twoDay()" id="twoDay">1~2 Days<button>
+<button class="button button2" style="border:none" onclick="threeDay()" id="threeDay">3~5 Days<button>
+<button class="button button3" style="border:none" onclick="week()" id="week">A week<button>
+
+<button class="button button1" style="border:none" onclick="oneK()" id="1k"> < 1000 <button>
+<button class="button button2" style="border:none" onclick="threeK()" id="5k"> 1000~5000<button>
+<button class="button button3" style="border:none" onclick="tenK()" id="10k"> > 5000<button>
+
+
+<script type="text/javascript">
+	var destination;
+	var duration;
+	var budget;
+
+	function sendInfo() {
+        $.post("handle.php",
+        {
+        	destination: destination,
+        	duration: duration,
+        	budget: budget
+        },
+        function(data,status){
+        	window.location.href = "result.html";
+        });
+	}
+
+	function start() {
+		$("#Phoenix").fadeIn();
+		$("#LV").fadeIn();
+		$("#Toronto").fadeIn();
+		$("#Q1").fadeIn();
+	}
+
+	function fadeDestination() {
+		$("#Q1").fadeOut();
+		$("#Phoenix").fadeOut();
+		$("#LV").fadeOut();
+		$("#Toronto").fadeOut();
+		$("#Q2").fadeIn(1000);
+		$("#twoDay").fadeIn(1000);
+		$("#threeDay").fadeIn(1000);
+		$("#week").fadeIn(1000);
+	}
+
+	function fadeDuration() {
+		$("#Q2").fadeOut();
+		$("#twoDay").fadeOut();
+		$("#threeDay").fadeOut();
+		$("#week").fadeOut();
+		$("#Q3").fadeIn(1000);
+		$("#1k").fadeIn(1000);
+		$("#5k").fadeIn(1000);
+		$("#10k").fadeIn(1000);
+	}
+
+	function Phoenix() {
+		fadeDestination();
+		destination = "Phoenix";
+	}
+
+	function LV() {
+		fadeDestination();
+		destination = "LV";
+	}
+
+	function Toronto() {
+		fadeDestination();
+		destination = "Toronto";
+	}	
+
+	function twoDay() {
+		fadeDuration();
+		duration = 2;
+	}
+
+	function threeDay() {
+		fadeDuration();
+		duration = 5;
+	}
+
+	function week() {
+		fadeDuration();
+		duration = 7;
+	}
+
+	function oneK() {
+		budget = 1000;
+		sendInfo();
+	}
+
+	function threeK() {
+		budget = 3000;
+		sendInfo();
+	}
+
+	function tenK() {
+		budget = 15000;
+		sendInfo();
+	}
+
+	start();
+	
+</script>
+
+
+
+</body>
+</html>
+
+
