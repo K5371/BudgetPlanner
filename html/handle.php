@@ -1,7 +1,5 @@
 <?php
-$destination = $_POST['destination'];
-$budget = $_POST['budget'];
-$duration = $_POST['duration'];
+
 
 $result_template = "<!DOCTYPE html>\n
 <html>\n
@@ -9,15 +7,21 @@ $result_template = "<!DOCTYPE html>\n
 	<title>Result</title>\n
 </head>\n
 <body>\n
-$destination
-$budget
-$duration
+$result
 </body>\n
 </html>\n";
-
-$myfile = fopen("result.html", "w");
-fwrite($myfile, $result_template);
-fclose($myfile);
+$url = $_SERVER['REQUEST_URI'];
+$query = parse_url($url, PHP_URL_QUERY);
+parse_str($query, $output);
+// parsed destination, duration, budget for SQL query use
+$destination = $output['destination'];
+$duration = $output['duration'];
+$budget = $output['budget'];
 echo $destination;
+echo "<br>";
+echo $duration;
+echo "<br>";
+echo $budget;
+
 
 ?>

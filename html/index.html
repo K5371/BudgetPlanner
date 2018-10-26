@@ -40,15 +40,16 @@
 	var budget;
 
 	function sendInfo() {
-        $.post("handle.php",
-        {
-        	destination: destination,
-        	duration: duration,
-        	budget: budget
-        },
-        function(data,status){
-        	window.location.href = "result.html";
-        });
+        // $.post("handle.php",
+        // {
+        // 	destination: destination,
+        // 	duration: duration,
+        // 	budget: budget
+        // },
+        // function(data,status){
+        // 	window.location.href = "result.html";
+        // });
+        window.location.href = `handle.php?destination=${destination}&duration=${duration}&budget=${budget}`;
 	}
 
 	function start() {
