@@ -14,7 +14,7 @@
   <a href="#about">About</a>
 </div>
 
-<!-- <?php
+<?php
 
 	$url = $_SERVER['REQUEST_URI'];
 	$query = parse_url($url, PHP_URL_QUERY);
@@ -28,23 +28,19 @@
 	echo $duration;
 	echo "<br>";
 	echo $budget;
+	$servername = "localhost";
+	$username = "budgetplanner_yijielu2";
+	$password = "password";
 
-?> -->
+	// Create connection
+	$conn = new mysqli($servername, $username, $password);
 
-<<?php 
-$servername = "localhost";
-$username = "budgetplanner_yijielu2";
-$password = "946983Yy2.2";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
- ?>
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	} 
+	echo "Connected successfully";
+?>
 
 </body>
 </html>
