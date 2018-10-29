@@ -9,8 +9,32 @@ body {
     font-size: 17px;
 }
 
+.topnav {
+  overflow: hidden;
+  background-color: #1e90ff;
+
+}
+
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
 
 #myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0px;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+#beach {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -105,4 +129,6 @@ body {
     background: #ddd;
     color: black;
 }
+
+
 </style>
