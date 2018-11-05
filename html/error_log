@@ -1,0 +1,31 @@
+[29-Oct-2018 17:32:17 America/Chicago] PHP Warning:  mysqli::mysqli(): (HY000/1045): Access denied for user 'budgetplanner_yijielu2'@'localhost' (using password: YES) in /home/budgetplanner/public_html/handle.php on line 36
+[29-Oct-2018 17:40:19 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/budgetplanner/public_html/handle.php on line 34
+[29-Oct-2018 17:40:21 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/budgetplanner/public_html/handle.php on line 34
+[29-Oct-2018 17:40:24 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/budgetplanner/public_html/handle.php on line 34
+[29-Oct-2018 17:40:26 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home/budgetplanner/public_html/handle.php on line 34
+[29-Oct-2018 17:58:06 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:58:08 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:58:09 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:13 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:15 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:37 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:44 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:45 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:45 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:45 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 17:59:45 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 18:00:09 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[29-Oct-2018 18:00:11 America/Chicago] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/budgetplanner/public_html/handle.php on line 39
+[30-Oct-2018 00:29:46 America/Chicago] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 96
+[30-Oct-2018 00:29:48 America/Chicago] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 96
+[30-Oct-2018 00:29:49 America/Chicago] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 96
+[31-Oct-2018 08:38:23 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:38:24 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:33 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:33 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:33 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:36 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:37 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:37 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 08:39:38 America/Chicago] PHP Parse error:  syntax error, unexpected '" . \n"' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/budgetplanner/public_html/handle.php on line 34
+[31-Oct-2018 09:23:22 America/Chicago] PHP Fatal error:  Call to undefined function append() in /home/budgetplanner/public_html/handle.php on line 55

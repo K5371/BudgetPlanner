@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="ISO-8859-1">
+
+    <link rel="stylesheet" type="text/css" href="template.css">
+	<title>Broke Result</title>
+	<style>
+        .searchTitle {
+            position: relative;
+            left: 0;
+            width: 99%;
+            text-align: center;
+            font-size: 30px;
+            font-style: Verdana;
+            color: black;
+            margin:10px;
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #87CEEB;
+            font-style: Verdana;
+        }
+        
+        .topnav a {
+          float: left;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+        
+        .myDivElement{
+            text-align:left;
+            list-style-type: none;
+            margin:50px;
+            vertical-align: top;
+            float:left;
+            position:relative;
+            left:20%;
+        }
+        .button {
+            position:relative;
+            width: 50%;
+            left: 25%;
+            margin:10px;
+            box-sizing: border-box;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .texts{
+            width: 80%;
+            text-align:left;
+            margin: 30px;
+            border: 2px solid black;
+        }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body style="height:100%; width:100%;">
+    <div class="topnav">
+      <a href="index.html">Trip Budget Planner</a>
+    </div>
+    <h1 style="position:relative; left:32px;">Cheap Plan (Sleep on the street)</h1>
+        <div class="texts" id="template"></div>
+    <script>
+        var destination = window.location.href.split("?")[1].split("=")[1];
+        var query = "(SELECT name, stars, business_id ";
+        query += "FROM Restaurants ";
+        query += `WHERE attributes__RestaurantsPriceRange2 = 1 and city = '${destination}' `;
+        query += "ORDER BY stars DESC ";
+        query += "LIMIT 3) UNION "; 
+        query += "(SELECT name, stars, business_id ";
+        query += "FROM Attractions ";
+        query += `WHERE attributes__RestaurantsPriceRange2 = 1 and city = '${destination}' `;
+        query += "ORDER BY stars DESC LIMIT 3)";
+        $.post('simpleQuery.php', {query: query, target: "broke"}, function(data, status) 
+                    {
+                        var temp = document.getElementsByClassName("texts")[0];
+                        var data_array = data.split("~~~");
+                        var head = document.createElement("h1");
+                        head.textContent = "Restaurants";
+                        head.setAttribute("style", "position:relative; left:32px;");
+                        document.body.appendChild(head);
+                        for (var i = 0; i < 3; i++) {
+                            var cln = temp.cloneNode(true);
+                            var currText = data_array[i].split("@@@")[0];
+                            currText += "Star:";
+                            currText += data_array[i].split("@@@")[1];
+                            if (currText.length == 0) {
+                                continue;
+                            }
+                            cln.textContent = currText;
+                            cln.setAttribute("id", data_array[i].split("@@@")[2]);
+                            cln.setAttribute("onclick", `restaurant_result('${data_array[i].split("@@@")[2]}')`);
+                            document.body.appendChild(cln);
+                        }
+                        head = document.createElement("h1");
+                        head.textContent = "Attractions";
+                        head.setAttribute("style", "position:relative; left:32px;");
+                        document.body.appendChild(head);
+                        for (var i = 3; i < 6; i++) {
+                            var cln = temp.cloneNode(true);
+                            var currText = data_array[i].split("@@@")[0];
+                            currText += "Star:";
+                            currText += data_array[i].split("@@@")[1];
+                            if (currText.length == 0) {
+                                continue;
+                            }
+                            cln.textContent = currText;
+                            cln.setAttribute("id", data_array[i].split("@@@")[2]);
+                            cln.setAttribute("onclick", `attraction_result('${data_array[i].split("@@@")[2]}')`);
+                            document.body.appendChild(cln);
+                        }
+                    });
+                    
+    function restaurant_result(clicked_id) {
+        window.open(`search_result.html?restaurant=${clicked_id}`, 'blank');
+    }
+    
+    function attraction_result(clicked_id) {
+        window.open(`search_result.html?attraction=${clicked_id}`, 'blank');
+    }
+    </script>
+</body>
+</html>

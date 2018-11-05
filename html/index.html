@@ -33,11 +33,19 @@
 <button class="button button2" style="border:none" onclick="threeK()" id="5k"> 1000~5000<button>
 <button class="button button3" style="border:none" onclick="tenK()" id="10k"> > 5000<button>
 
+<button class="button button1" style="border:none" onclick="sendInfo()" id="regular">Regular Plan<button>
+<button class="button button3" style="border:none" onclick="broke()" id="broke">I'm Broke<button>
+
+
 
 <script type="text/javascript">
 	var destination;
 	var duration;
 	var budget;
+	
+	function broke() {
+        window.location.href = `broke.html?destination=${destination}`;
+	}
 
 	function sendInfo() {
         // $.post("handle.php",
@@ -49,7 +57,7 @@
         // function(data,status){
         // 	window.location.href = "result.html";
         // });
-        window.location.href = `handle.php?destination=${destination}&duration=${duration}&budget=${budget}`;
+        window.location.href = `result.html?destination=${destination}&duration=${duration}&budget=${budget}`;
 	}
 
 	function start() {
@@ -80,6 +88,15 @@
 		$("#5k").fadeIn(1000);
 		$("#10k").fadeIn(1000);
 	}
+	
+	function fadeBudget() {
+	    $("#Q3").fadeOut();
+		$("#1k").fadeOut();
+		$("#5k").fadeOut();
+		$("#10k").fadeOut();
+		$("#regular").fadeIn(1000);
+		$("#broke").fadeIn(1000);
+	}
 
 	function Phoenix() {
 		fadeDestination();
@@ -88,7 +105,7 @@
 
 	function LV() {
 		fadeDestination();
-		destination = "LV";
+		destination = "Las Vegas";
 	}
 
 	function Toronto() {
@@ -112,18 +129,18 @@
 	}
 
 	function oneK() {
+	    fadeBudget();
 		budget = 1000;
-		sendInfo();
 	}
 
 	function threeK() {
+	    fadeBudget();
 		budget = 3000;
-		sendInfo();
 	}
 
 	function tenK() {
+	    fadeBudget();
 		budget = 15000;
-		sendInfo();
 	}
 
 	start();

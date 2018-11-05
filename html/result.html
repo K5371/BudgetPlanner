@@ -1,18 +1,210 @@
 <!DOCTYPE html>
-
-<html>
-
+<html >
 <head>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="template.css">
 	<title>Result</title>
+	<style>
+.searchTitle {
+    position: relative;
+    left: 0;
+    width: 99%;
+    text-align: center;
+    font-size: 30px;
+    font-style: Verdana;
+    color: black;
+    margin:10px;
+}
 
+.topnav {
+  overflow: hidden;
+  background-color: #87CEEB;
+  font-style: Verdana;
+}
+
+.topnav a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.myDivElement{
+    text-align:left;
+    list-style-type: none;
+    margin:50px;
+    vertical-align: top;
+    float:left;
+    position:relative;
+    left:20%;
+}
+.button {
+    position:relative;
+    width: 50%;
+    left: 25%;
+    margin:10px;
+    box-sizing: border-box;
+    border: 2px solid #87CEEB;
+    border-radius: 5px;
+    text-align: center;
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body style="height:100%; width:100%;">
+<div class="topnav">
+  <a href="index.html">Trip Budget Planner</a>
+</div>
+<div class="searchTitle" name="hotel">Hotel Recommendation</div>
+<div class="searchTitle" name="restaurant" style="display:none" id="restaurantTitle">Restaurant Recommendation</div>
+<div class="searchTitle" name="attraction" style="display:none" id="attractionTitle">Attraction Recommendation</div>
+<div class="searchTitle" name="attraction" style="display:none" id="resultTitle">Result</div>
 
 
+<template>
+  <div class="button"></div>
+</template>
+<script>
+    function processQuery(Url, data, target) {
+        $.post(Url, data, function(data, status) 
+        {
+            queryData = data.split("\n");
+            temp = document.getElementsByTagName("template")[0];
+            item = temp.content.querySelector("div");
+            for (var i = 0; i < queryData.length - 1; i++) {
+                var pair = queryData[i].split("@@@");
+                a = document.importNode(item, true);
+                a.textContent += pair[0];
+                a.textContent += " $" + pair[1];
+                a.setAttribute("id", pair[2]);
+                a.setAttribute("name", target);
+                a.setAttribute("onclick", target + "('" + pair[2] + "')");
+                console.log(target + " " + pair[0]);
+                document.body.appendChild(a);
+            }
+        });
+    }
+    
+    function simpleQuery(Url, inputData, target) {
+        $.post(Url, inputData, function(data, status) 
+        {
+            item = temp.content.querySelector("div");
+            var a = document.importNode(item, true);
+            a.textContent = data;
+            a.setAttribute("id", inputData['id']);
+            a.setAttribute("name", target+"_result");
+            a.setAttribute("onclick", target + "_result" + "('" + inputData['id'] + "')");
+            document.body.appendChild(a);
+        });
+    }
+    
+    var hotel_id, restaurant_id, attraction_id;
+    
+    var pairs = window.location.href.split("?")[1].split("&");
+    var query = {};
+    for (var i = 0; i < pairs.length; i++) {
+        query[pairs[i].split("=")[0]] = pairs[i].split("=")[1];
+    }
+    Url = '/handle.php';
 
+    data={
+    	destination:query["destination"],
+    	duration:query["duration"],
+    	budget:query["budget"],
+    	target:"Hotels"
+    }
+    
+   
+    //console.log(result.length);
+
+    processQuery(Url, data, "hotel");
+        
+    function hotel(clicked_id) {
+        hotel_id = clicked_id;
+        var arrayOfElements=document.getElementsByName("hotel");
+        var lengthOfArray=arrayOfElements.length;
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='none';
+        }
+        document.getElementById("restaurantTitle").style.display='block';
+        data={
+        	destination:query["destination"],
+        	duration:query["duration"],
+        	budget:query["budget"],
+        	target:"Restaurants"
+        }
+        processQuery(Url, data, "restaurant");
+        
+    }
+    
+    function restaurant(clicked_id) {
+        restaurant_id = clicked_id;
+        var arrayOfElements=document.getElementsByName("restaurant");
+        var lengthOfArray=arrayOfElements.length;
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='none';
+        }
+        document.getElementById("attractionTitle").style.display='block';
+        data={
+        	destination:query["destination"],
+        	duration:query["duration"],
+        	budget:query["budget"],
+        	target:"Attractions"
+        }
+        processQuery(Url, data, "attraction");
+    }
+    
+    function attraction(clicked_id) {
+        attraction_id = clicked_id;
+        var arrayOfElements=document.getElementsByName("attraction");
+        var lengthOfArray=arrayOfElements.length;
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='none';
+        }
+        document.getElementById("resultTitle").style.display='block';
+        data = {
+            query:`select hotel_name, id from Hotels where id = ${hotel_id};`,
+            id:hotel_id,
+            target:"hotel"
+        }
+
+        Url = "simpleQuery.php";
+        simpleQuery(Url, data, "hotel");
+        data = {
+            query:`select name, business_id from Restaurants where business_id = "${restaurant_id}";`,
+            id:restaurant_id,
+            target:"restaurant"
+        }
+        simpleQuery(Url, data, "restaurant");
+        data = {
+            query:`select name, business_id from Attractions where business_id = "${attraction_id}";`,
+            id:attraction_id,
+            target:"attraction"
+        }
+        simpleQuery(Url, data, "attraction");
+        
+    }
+    
+    function hotel_result(clicked_id) {
+        window.open(`search_result.html?hotel=${clicked_id}`, 'blank');
+    }
+    
+    function restaurant_result(clicked_id) {
+        window.open(`search_result.html?restaurant=${clicked_id}`, 'blank');
+
+    }
+    
+    function attraction_result(clicked_id) {
+        window.open(`search_result.html?attraction=${clicked_id}`, 'blank');
+
+    }
+
+    
+</script>
 
 </body>
-
 </html>

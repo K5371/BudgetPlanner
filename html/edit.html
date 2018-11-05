@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="template.css">
+	<title>Edit Page</title>
+	<style>
+        .searchTitle {
+            position: relative;
+            left: 0;
+            width: 99%;
+            text-align: center;
+            font-size: 30px;
+            font-style: Verdana;
+            color: black;
+            margin:10px;
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #87CEEB;
+            font-style: Verdana;
+        }
+        
+        .topnav a {
+          float: left;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+        
+        .myDivElement{
+            text-align:left;
+            list-style-type: none;
+            margin:50px;
+            vertical-align: top;
+            float:left;
+            position:relative;
+            left:20%;
+        }
+        .button {
+            position:relative;
+            width: 50%;
+            left: 25%;
+            margin:10px;
+            box-sizing: border-box;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .texts{
+            width: 80%;
+            text-align:left;
+            margin: 30px;
+            border: 2px solid black;
+        }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body style="height:100%; width:100%;">
+    <div class="topnav">
+      <a href="index.html">Trip Budget Planner</a>
+    </div>
+    <p style="position:relative; left:10px;">Edit Review:<br>
+    <input type="text" id="frm1" style="width:400px;height:100px;">
+    <button onclick="editReview()">submit</button>
+    <script>
+        var query = window.location.href.split("?")[1].split("&");
+        var review_id = query[0].split("=")[1];
+        var target = query[1].split("=")[1];
+        var business_id = query[2].split("=")[1];
+        //UPDATE Reviews SET review_text = "good" WHERE review_id = "l1344x50z397s8pyy2ta"
+        function editReview() {
+            var text = document.getElementById("frm1").value;
+            if (text.length == 0) {
+                alert("Empty!");
+            }
+            else {
+                $.post('simpleQuery.php', {query: `UPDATE Reviews SET review_text = '${text}' WHERE review_id = '${review_id}';`, target:target}, function(data, status) 
+                    {});
+                location.href = "search_result.html?" + target + "=" + business_id;
+            }
+        }
+    </script>
+
+</body>
+</html>

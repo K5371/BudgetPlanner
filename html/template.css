@@ -3,38 +3,39 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: Arial;
     font-size: 17px;
+    height: 100%;
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #1e90ff;
 
+
+.head {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    font-style: Arial;
+    color: black;
 }
 
-.topnav a {
-  float: right;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+.cities {
+    background-color: black;
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
 }
-
 
 #myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    top: 0px;
-    min-width: 100%; 
-    min-height: 100%;
-}
-
-#beach {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -104,17 +105,6 @@ body {
     display:none;
 }
 
-.head {
-    position: absolute;
-    left: 0;
-    top: 10%;
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
-    font-style: Arial;
-    color: white;
-}
-
 #myBtn {
     width: 200px;
     font-size: 18px;
@@ -129,6 +119,4 @@ body {
     background: #ddd;
     color: black;
 }
-
-
 </style>

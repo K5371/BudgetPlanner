@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet" type="text/css" href="template.css">
+	<title>Detail</title>
+	<style>
+        .searchTitle {
+            position: relative;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            font-style: Verdana;
+            color: black;
+            margin:10px;
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #87CEEB;
+            font-style: Verdana;
+        }
+        
+        .topnav a {
+          float: left;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+        
+        .myDivElement{
+            text-align:left;
+            list-style-type: none;
+            margin:50px;
+            vertical-align: top;
+            float:left;
+            position:relative;
+            left:20%;
+        }
+        .button {
+            position:relative;
+            width: 50%;
+            left: 25%;
+            margin:10px;
+            box-sizing: border-box;
+            border: 2px solid #87CEEB;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .texts{
+            width: 80%;
+            text-align:left;
+            position: relative;
+            left: 32px;
+            border: 2px solid black;
+        }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body style="height:100%; width:100%;">
+    <div class="topnav">
+      <a href="index.html">Trip Budget Planner</a>
+    </div>
+    
+    <h1 id="detailTitle" style="position:relative; left:32px;">Reviews</h1>
+    <div class="texts" id="template"></div>
+    
+      <p style="position:relative; left:32px;">Add Review:<br>
+      <input type="text" id="frm1" style="width:400px;height:100px;">
+      <button onclick="insertReview()">submit</button>
+
+<script>
+    var query = window.location.href.split("?")[1];
+    var target = query.split("=")[0];
+    var id = query.split("=")[1];
+    
+    if (target == 'hotel') {
+         $.post('simpleQuery.php', {query: `select hotel_name from Hotels where id = ${id}`, target:`${target}`}, function(data, status) 
+        {
+            document.getElementById("detailTitle").innerHTML = data;
+        });
+    }
+    else if (target == 'restaurant') {
+        $.post('simpleQuery.php', {query: `select name from Restaurants where business_id = '${id}'`, target:`${target}`}, function(data, status) 
+        {
+            document.getElementById("detailTitle").innerHTML = data;
+        });
+    }
+    else {
+        $.post('simpleQuery.php', {query: `select name from Attractions where business_id = '${id}'`, target:`${target}`}, function(data, status) 
+        {
+            document.getElementById("detailTitle").innerHTML = data;
+        });
+    }
+   
+    
+    $.post('simpleQuery.php', {query: `select review_text, review_id from Reviews where business_id =  '${id}'`, target:"review"}, function(data, status) 
+        {
+            var temp = document.getElementsByClassName("texts")[0];
+            var data_array = data.split("~~~");
+            for (var i = 0; i < data_array.length - 1; i++) {
+                    var cln = temp.cloneNode(true);
+                    var currText = data_array[i].split("@@@")[0];
+                    if (currText.length == 0) {
+                        continue;
+                    }
+                    cln.textContent = currText;
+                    document.body.appendChild(cln);
+                    var btn = document.createElement("button");
+                    btn.textContent = "Delete";
+                    btn.setAttribute("id", data_array[i].split("@@@")[1]);
+                    btn.setAttribute("onclick", `delete_review('${data_array[i].split("@@@")[1]}')`);
+                    btn.setAttribute("style", "position: relative; left: 32px;")
+                    document.body.appendChild(btn);
+                    btn = document.createElement("button");
+                    btn.textContent = "Edit";
+                    btn.setAttribute("id", data_array[i].split("@@@")[1]);
+                    btn.setAttribute("onclick", `edit_review('${data_array[i].split("@@@")[1]}')`);
+                    btn.setAttribute("style", "position: relative; left: 32px; margin:5px;")
+                    document.body.appendChild(btn);
+            }
+    });
+    
+    // var elmnt = document.getElementsByTagName("DIV")[0];
+    // var cln = elmnt.cloneNode(true);
+    // document.body.appendChild(cln);
+    
+    
+    function insertReview() {
+            var text = document.getElementById("frm1").value;
+            
+            if (text.length == 0) {
+                alert("Empty!");
+            }
+            else {
+                var generate_id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    $.post('simpleQuery.php', {query: `INSERT INTO Reviews (review_id, business_id, review_text) VALUES ("${generate_id}", ${id}, "${text}");`, target:"review"}, function(data, status) 
+                    {});
+                location.reload();
+            }
+    }
+    
+    function delete_review(clicked_id) {
+            $.post('simpleQuery.php', {query: `DELETE FROM Reviews where review_id = '${clicked_id}';`, target:"review"}, function(data, status) 
+                    {});
+        location.reload();
+    }
+    
+    function edit_review(clicked_id) {
+        window.open(`edit.html?review_id=${clicked_id}&target=${target}&business_id=${id}`, 'blank');
+    }
+    
+</script>
+</body>
+</html>
